@@ -11,7 +11,6 @@ const authorize = require('../middleware/role');
  */
 
 router.use(auth);
-router.use(authorize('admin'));
 
 /**
  * @swagger
@@ -25,7 +24,7 @@ router.use(authorize('admin'));
  *       200:
  *         description: List of customers
  */
-router.get('/', getAllCustomers);
+router.get('/',authorize('admin'), getAllCustomers);
 
 /**
  * @swagger

@@ -14,6 +14,9 @@ const connectMongo = require('./config/mongo');
 const app = express();
 dotenv.config();
 
+connectMySQL();
+connectMongo();
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,8 +25,5 @@ app.use('/api/customers', customerRoutes);
 app.use('/api/loans', loanRoutes);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-
-connectMySQL();
-connectMongo();
 
 module.exports = app;

@@ -1,5 +1,5 @@
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
+const { Sequelize } = require('sequelize')
+require('dotenv').config()
 
 const sequelize = new Sequelize(
   process.env.MYSQL_DB,
@@ -10,17 +10,17 @@ const sequelize = new Sequelize(
     port: process.env.MYSQL_PORT,
     dialect: 'mysql'
   }
-);
+)
 
 const connectMySQL = async () => {
   try {
-    await sequelize.authenticate();
-    console.log('MySQL connected');
-    await sequelize.sync({ alter: true });
-    console.log('Sequelize models synced');
+    await sequelize.authenticate()
+    console.log('MySQL connected')
+    await sequelize.sync({ alter: true })
+    console.log('Sequelize models synced')
   } catch (err) {
-    console.error('MySQL connection failed:', err);
+    console.error('MySQL connection failed:', err)
   }
-};
+}
 
-module.exports = { sequelize, connectMySQL };
+module.exports = { sequelize, connectMySQL }

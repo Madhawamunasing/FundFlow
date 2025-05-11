@@ -54,63 +54,77 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={showRegister ? handleRegister : handleLogin} className="bg-white p-8 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6">{showRegister ? 'Register' : 'Login'} to FundFlow</h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+    <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
+      <form
+        onSubmit={showRegister ? handleRegister : handleLogin}
+        className="bg-white p-4 rounded shadow-sm w-100"
+        style={{ maxWidth: '400px' }}
+      >
+        <h2 className="mb-4 text-center">{showRegister ? 'Register' : 'Login'} to FundFlow</h2>
+        {error && <div className="alert alert-danger">{error}</div>}
         {showRegister && (
           <>
-            <input
-              type="text"
-              placeholder="Name"
-              className="w-full p-2 border rounded mb-4"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              placeholder="NIC"
-              className="w-full p-2 border rounded mb-4"
-              value={nic}
-              onChange={(e) => setNic(e.target.value)}
-              required
-            />
-            <input
-              type="number"
-              placeholder="Monthly Income"
-              className="w-full p-2 border rounded mb-4"
-              value={income}
-              onChange={(e) => setIncome(e.target.value)}
-              required
-            />
+            <div className="mb-3">
+              <input
+                type="text"
+                placeholder="Name"
+                className="form-control"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                placeholder="NIC"
+                className="form-control"
+                value={nic}
+                onChange={(e) => setNic(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="number"
+                placeholder="Monthly Income"
+                className="form-control"
+                value={income}
+                onChange={(e) => setIncome(e.target.value)}
+                required
+              />
+            </div>
           </>
         )}
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded mb-4"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded mb-4"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
+        <div className="mb-3">
+          <input
+            type="email"
+            placeholder="Email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <input
+            type="password"
+            placeholder="Password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary w-100">
           {showRegister ? 'Register' : 'Login'}
         </button>
         <button
           type="button"
           onClick={() => setShowRegister(!showRegister)}
-          className="w-full mt-3 text-blue-500 text-sm hover:underline"
+          className="btn btn-link w-100 mt-2"
         >
-          {showRegister ? 'Back to Login' : 'Don\'t have an account? Register'}
+          {showRegister ? 'Back to Login' : "Don't have an account? Register"}
         </button>
       </form>
     </div>

@@ -68,87 +68,94 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
+    <div className="container py-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="h3">Admin Dashboard</h1>
+        <button onClick={handleLogout} className="btn btn-danger">Logout</button>
       </div>
 
-      <button
-        className="mb-4 px-4 py-2 bg-green-600 text-white rounded"
-        onClick={() => setShowAddAdmin(!showAddAdmin)}
-      >
+      <button className="btn btn-success mb-3" onClick={() => setShowAddAdmin(!showAddAdmin)}>
         {showAddAdmin ? 'Cancel Admin Registration' : 'Add New Admin'}
       </button>
 
       {showAddAdmin && (
-        <form onSubmit={submitNewAdmin} className="bg-white shadow p-4 rounded mb-6 max-w-lg">
-          <h2 className="text-xl font-semibold mb-4">Register Admin</h2>
-          {message && <p className="mb-4 text-blue-600">{message}</p>}
-          <input type="text" name="name" placeholder="Name" value={adminData.name} onChange={handleAdminChange} required className="w-full border p-2 mb-3" />
-          <input type="text" name="nic" placeholder="NIC" value={adminData.nic} onChange={handleAdminChange} required className="w-full border p-2 mb-3" />
-          <input type="email" name="email" placeholder="Email" value={adminData.email} onChange={handleAdminChange} required className="w-full border p-2 mb-3" />
-          <input type="password" name="password" placeholder="Password" value={adminData.password} onChange={handleAdminChange} required className="w-full border p-2 mb-3" />
-          <input type="number" name="income" placeholder="Monthly Income" value={adminData.income} onChange={handleAdminChange} required className="w-full border p-2 mb-3" />
-          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Register Admin</button>
+        <form onSubmit={submitNewAdmin} className="card p-4 mb-4">
+          <h5 className="card-title">Register Admin</h5>
+          {message && <div className="alert alert-info">{message}</div>}
+          <div className="mb-3">
+            <input type="text" name="name" placeholder="Name" value={adminData.name} onChange={handleAdminChange} required className="form-control" />
+          </div>
+          <div className="mb-3">
+            <input type="text" name="nic" placeholder="NIC" value={adminData.nic} onChange={handleAdminChange} required className="form-control" />
+          </div>
+          <div className="mb-3">
+            <input type="email" name="email" placeholder="Email" value={adminData.email} onChange={handleAdminChange} required className="form-control" />
+          </div>
+          <div className="mb-3">
+            <input type="password" name="password" placeholder="Password" value={adminData.password} onChange={handleAdminChange} required className="form-control" />
+          </div>
+          <div className="mb-3">
+            <input type="number" name="income" placeholder="Monthly Income" value={adminData.income} onChange={handleAdminChange} required className="form-control" />
+          </div>
+          <button type="submit" className="btn btn-primary">Register Admin</button>
         </form>
       )}
 
-      <h2 className="text-xl font-semibold mb-2">Customers</h2>
-      <table className="w-full mb-8 border">
-        <thead className="bg-gray-200">
+      <h4 className="mb-3">Customers</h4>
+      <table className="table table-bordered mb-4">
+        <thead className="table-light">
           <tr>
-            <th className="p-2 border">Name</th>
-            <th className="p-2 border">NIC</th>
-            <th className="p-2 border">Email</th>
-            <th className="p-2 border">Monthly Income</th>
-            <th className="p-2 border">Credit Score</th>
+            <th>Name</th>
+            <th>NIC</th>
+            <th>Email</th>
+            <th>Monthly Income</th>
+            <th>Credit Score</th>
           </tr>
         </thead>
         <tbody>
           {customers.map(c => (
-            <tr key={c.id} className="text-center">
-              <td className="p-2 border">{c.name}</td>
-              <td className="p-2 border">{c.nic}</td>
-              <td className="p-2 border">{c.email}</td>
-              <td className="p-2 border">{c.monthlyIncome}</td>
-              <td className="p-2 border">{c.creditScore}</td>
+            <tr key={c.id}>
+              <td>{c.name}</td>
+              <td>{c.nic}</td>
+              <td>{c.email}</td>
+              <td>{c.monthlyIncome}</td>
+              <td>{c.creditScore}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <h2 className="text-xl font-semibold mb-2">Loan Applications</h2>
-      <div className="mb-4">
-        <label className="mr-2">Filter by status:</label>
-        <select onChange={(e) => setFilter(e.target.value)} className="border p-1">
+      <h4 className="mb-3">Loan Applications</h4>
+      <div className="mb-3">
+        <label className="form-label">Filter by status:</label>
+        <select onChange={(e) => setFilter(e.target.value)} className="form-select w-auto">
           <option value="all">All</option>
           <option value="approved">Approved</option>
           <option value="rejected">Rejected</option>
         </select>
       </div>
-      <table className="w-full border">
-        <thead className="bg-gray-200">
+      <table className="table table-bordered">
+        <thead className="table-light">
           <tr>
-            <th className="p-2 border">Customer ID</th>
-            <th className="p-2 border">Loan Amount</th>
-            <th className="p-2 border">Duration</th>
-            <th className="p-2 border">Purpose</th>
-            <th className="p-2 border">Score</th>
-            <th className="p-2 border">Status</th>
-            <th className="p-2 border">Recommendation</th>
+            <th>Customer ID</th>
+            <th>Loan Amount</th>
+            <th>Duration</th>
+            <th>Purpose</th>
+            <th>Score</th>
+            <th>Status</th>
+            <th>Recommendation</th>
           </tr>
         </thead>
         <tbody>
           {filteredLoans.map(l => (
-            <tr key={l.id} className="text-center">
-              <td className="p-2 border">{l.customerId}</td>
-              <td className="p-2 border">{l.loanAmount}</td>
-              <td className="p-2 border">{l.durationMonths} months</td>
-              <td className="p-2 border">{l.purpose}</td>
-              <td className="p-2 border">{l.score}</td>
-              <td className="p-2 border">{l.status}</td>
-              <td className="p-2 border">{l.recommendation}</td>
+            <tr key={l.id}>
+              <td>{l.customerId}</td>
+              <td>{l.loanAmount}</td>
+              <td>{l.durationMonths} months</td>
+              <td>{l.purpose}</td>
+              <td>{l.score}</td>
+              <td>{l.status}</td>
+              <td>{l.recommendation}</td>
             </tr>
           ))}
         </tbody>
