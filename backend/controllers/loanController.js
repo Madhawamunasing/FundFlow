@@ -16,10 +16,6 @@ exports.createLoan = async (req, res) => {
       ...input,
       creditScore: customer.creditScore
     })
-    console.log(calculateScore({
-      ...input,
-      creditScore: customer.creditScore
-    }));
     const loan = await Loan.create({
       ...input,
       customerId: req.user.id,

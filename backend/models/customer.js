@@ -32,7 +32,7 @@ const Customer = sequelize.define('Customer', {
   role: { 
     type: DataTypes.ENUM('admin', 'customer'),
     allowNull: false,
-    defaultValue: 'customer'
+    defaultValue: 'admin'
   },
   password: { 
     type: DataTypes.STRING, 
@@ -40,10 +40,10 @@ const Customer = sequelize.define('Customer', {
   }
 }, {
   hooks: {
-    beforeCreate: (user) => {
-      if (user.role === 'admin') {
-        user.creditScore = 850;
-        user.monthlyIncome = 0;
+    beforeCreate: (Customer) => {
+      if (Customer.role === 'admin') {
+        Customer.creditScore = 850;
+        Customer.monthlyIncome = 0;
       }
     }
   }

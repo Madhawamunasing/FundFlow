@@ -13,21 +13,13 @@ const sequelize = new Sequelize(
 )
 
 const connectMySQL = async () => {
-  let retries = 5
-  while (retries) {
-    try {
-      await sequelize.authenticate()
-      console.log('MySQL connected')
-      break
-    } catch (err) {
-      console.error('MySQL connection failed, retrying in 5s...')
-      retries -= 1
-      await new Promise(res => setTimeout(res, 5000))
-    }
-  }
-  if (retries === 0) {
-    console.error('MySQL connection failed after retries. Exiting.')
-    process.exit(1)
+  try {
+    await sequelize.authenticate()
+    console.log('MySQL connected')
+    await sequelize.sync({ alter: true })
+    console.log('Sequelize models synced')
+  } catch (err) {
+    console.error('MySQL connection failed:', err)
   }
 }
 

@@ -8,6 +8,7 @@ exports.register = async (req, res) => {
     const hash = await bcrypt.hash(password, 10);
     const creditScore = Math.floor(Math.random() * 551 + 300);
     const user = await Customer.create({ name, nic, email, monthlyIncome, creditScore, password: hash, role });
+    console.log(user);
     res.status(201).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
